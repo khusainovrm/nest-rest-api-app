@@ -9,7 +9,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { ProductsModule } from './products/products.module'
 import { ConfigModule } from '@nestjs/config'
-import { LoggerMiddleware } from './middlewate/logger.middleware'
+import { logger } from './middlewate/logger.middleware'
 
 @Module({
   imports: [
@@ -25,7 +25,7 @@ import { LoggerMiddleware } from './middlewate/logger.middleware'
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(LoggerMiddleware)
+      .apply(logger)
       .forRoutes({ path: 'products', method: RequestMethod.GET })
   }
 }
