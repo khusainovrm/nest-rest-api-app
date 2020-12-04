@@ -26,9 +26,11 @@ export class ProductsController {
     return `Title: ${createProductDto.title} Price:${createProductDto.price}`;
   }
 
-  // @Delete
-  // remove() {}
-  //
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return 'Removed ' + id;
+  }
+
   // @Put
   // update() {}
 }
