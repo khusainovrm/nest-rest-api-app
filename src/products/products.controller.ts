@@ -8,6 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -31,6 +32,11 @@ export class ProductsController {
     return 'Removed ' + id;
   }
 
-  // @Put
-  // update() {}
+  @Put(':id')
+  update(
+    @Body() updateProductDto: UpdateProductDto,
+    @Param('id') id: string,
+  ): string {
+    return `Updated product #${id} and new product title: ${updateProductDto.title} and price: ${updateProductDto.price}`;
+  }
 }
