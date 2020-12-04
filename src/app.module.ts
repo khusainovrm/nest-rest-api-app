@@ -1,4 +1,9 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -19,6 +24,8 @@ import { LoggerMiddleware } from './middlewate/logger.middleware'
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('products')
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: 'products', method: RequestMethod.GET })
   }
 }
