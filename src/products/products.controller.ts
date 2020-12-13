@@ -8,7 +8,7 @@ import {
   HttpStatus,
   Param,
   Post,
-  Put,
+  Put
 } from '@nestjs/common'
 import { CreateProductDto } from './dto/create-product.dto'
 import { UpdateProductDto } from './dto/update-product.dto'
@@ -56,7 +56,7 @@ export class ProductsController {
   @Put(':id')
   update(
     @Body() updateProductDto: UpdateProductDto,
-    @Param('id') id: string,
+    @Param('id') id: string
   ): Promise<Product> {
     return this.productsService.update(id, updateProductDto)
   }

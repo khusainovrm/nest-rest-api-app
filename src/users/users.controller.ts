@@ -7,12 +7,12 @@ import {
   HttpStatus,
   Param,
   Post,
-  Put,
+  Put
 } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { User } from './schemas/user.schema'
 import { CreateUserDto } from './dto/create-user.dto'
-import { Product } from '../products/schemas/product.schema'
+import { UserDto } from './dto/user.dto'
 
 @Controller('users')
 export class UsersController {
@@ -21,6 +21,11 @@ export class UsersController {
   @Get()
   getAllUsers(): Promise<User[]> {
     return this.userService.getAllUsers()
+  }
+
+  @Post('byEmailAndPassword')
+  test(@Body() user: UserDto): Promise<User> {
+    return this.userService.getByEmail(user)
   }
 
   @Get(':id')
@@ -42,7 +47,7 @@ export class UsersController {
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body() updateUserDto: CreateUserDto,
+    @Body() updateUserDto: CreateUserDto
   ): Promise<User> {
     return this.userService.update(id, updateUserDto)
   }
